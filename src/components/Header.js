@@ -1,6 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react';
+import Button from './Button'
 
-function Header() {
+function Header({ login, loginState }) {
+  // const [login, setLogin] = useState(false);
+
+  function openLogin() {
+    loginState(true);
+  }
+
   return (
     <header>
         <h1 className='logo'>VisionVault</h1>
@@ -12,8 +19,8 @@ function Header() {
         </ul>
         <ul>
             <li><a href="#">Search</a></li>
-            <li><a href="#">Log In</a></li>
-            <li><a href="#">Sign Up</a></li>
+            <Button text='Log In' margin='0 5px' onClick={openLogin}/>
+            <Button text='Sign Up'/>
         </ul>
     </header>
   )

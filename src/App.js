@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react'
 import './App.css';
-import { Auth } from './components/Auth';
+import  { Login }  from './components/Login';
 import { db } from './config/firebase';
 import { getDocs, collection } from 'firebase/firestore';
 import Header from './components/Header';
 
 function App() {
   const [images, setImages] = useState([]);
+  const [login, setLogin] = useState(false);
 
-  const imagesCollectionRef = collection(db, 'images')
+  const imagesCollectionRef = collection(db, 'images');
 
   useEffect(() => {
     const getImages = async () => {
@@ -24,12 +25,16 @@ function App() {
       } 
     }
     getImages();
-  }, [])
+  }, []);
+
+  function loginState(state) {
+    setLogin(state);
+  }
 
   return (
     <div className="App">
-      <Header />
-      {/* <Auth /> */}
+      <Header login={login} loginState={loginState}/>
+      {login ?  <Login loginState={loginState}/> : ''}
     </div>
   );
 }
